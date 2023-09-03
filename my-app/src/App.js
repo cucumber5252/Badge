@@ -1,5 +1,11 @@
+import Test from "./pages/test.js";
+
 const App = () => {
-  return <></>;
+  return (
+    <>
+      <Test />
+    </>
+  );
 };
 
 export default App;
