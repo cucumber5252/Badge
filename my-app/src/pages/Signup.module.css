@@ -1,0 +1,92 @@
+.loginDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.titleImg {
+  margin-bottom: 10vh;
+  width: 100vw;
+}
+
+.nicknameDiv,
+.idDiv {
+  margin-bottom: 5vh;
+}
+
+.nicknameDiv,
+.idDiv,
+.pwDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nicknameTitle,
+.idTitle,
+.pwTitle {
+  font-size: 6vw;
+  margin-right: 3vw;
+}
+
+.nicknameInput,
+.idInput {
+  margin-left: 4vw;
+}
+
+.nicknameInput,
+.idInput,
+.pwInput {
+  width: 50vw;
+  border: 0.7vw solid black;
+  height: 2.5vh;
+  background-color: #f4e286;
+  font-weight: 700;
+  font-size: 5vw;
+  padding: 0.6vh 2vw 0.5vh;
+}
+
+.signupButton {
+  width: 25vw;
+  height: fit-content;
+  padding: 3vw 2vh;
+  font-size: 6vw;
+  text-align: center;
+  position: relative;
+  background: transparent;
+}
+
+.signupButton::before {
+  content: "";
+  position: absolute;
+  border: 0.8vw solid black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transform: skew(-20deg);
+}
+
+.signupButton::before {
+  background-color: #f4e286;
+}
+
+.signupButton:hover {
+  z-index: 1;
+  text-decoration: underline;
+}
+
+.signupButton {
+  margin-top: 7vh;
+}
+
+.errorMessage {
+  position: absolute;
+  bottom: -3vh;
+  font-size: 4.5vw;
+  font-weight: normal;
+  color: #e70909;
+}

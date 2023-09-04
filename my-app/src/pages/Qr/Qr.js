@@ -1,4 +1,5 @@
 import './Qr.module.css';
+import qrExample from '../../assets/Qr/qrExample';
 
 function Qr() {
 
@@ -7,7 +8,7 @@ function Qr() {
     <>
     <div>
         <div>
-            <p>QR</p>
+            <img src="qrExample" alt="qrExample"/>
         </div>
         <div>
             <p>상대에게 QR을 보여주어 매칭</p>
@@ -15,7 +16,6 @@ function Qr() {
 
     </div>
 
-    
     </>
     );
 }
