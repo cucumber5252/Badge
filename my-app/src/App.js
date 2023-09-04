@@ -2,6 +2,15 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NavBar from "./components/NavBar/NavBar";
 
+import yellowBack from "./assets/Backgrounds/yellow.png";
+import redBack from "./assets/Backgrounds/red.png";
+import greenBack from "./assets/Backgrounds/green.png";
+import blueBack from "./assets/Backgrounds/blue.png";
+import purpleBack from "./assets/Backgrounds/purple.png";
+
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+
 const App = () => {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState([]);
@@ -27,9 +36,27 @@ const App = () => {
       });
   }, []);
 
+  // const backgroundImages = [
+  //   yellowBack,
+  //   blueBack,
+  //   purpleBack,
+  //   redBack,
+  //   greenBack,
+  // ];
+
+  // // 랜덤 이미지 선택
+  // const randomIndex = Math.floor(Math.random() * backgroundImages.length);
+  // const selectedBackground = backgroundImages[randomIndex];
+
+  // useEffect(() => {
+  //   document.body.style.backgroundImage = `url(${selectedBackground})`;
+  //   document.body.style.backgroundSize = "cover";
+  // }, [selectedBackground]);
+
   return (
     <>
-      <NavBar userData={userData} />
+      <Signup />
+      {/* <NavBar userData={userData} /> */}
       {/* <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

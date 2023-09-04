@@ -29,4 +29,5 @@ input:focus {
 
 body {
   min-width: 320px;
+  overflow: hidden;
 }
