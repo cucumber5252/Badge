@@ -11,6 +11,15 @@ import purpleBack from "./assets/Backgrounds/purple.png";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
+// import Qr from "./pages/Qr";
+import Game1 from "./pages/Game1";
+import Game2 from "./pages/Game2";
+// import Loading1 from "./pages/Loading1";
+// import Back from "./pages/Back";
+
+
+
+
 const App = () => {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState([]);
@@ -55,7 +64,7 @@ const App = () => {
 
   return (
     <>
-      <Signup />
+      <Game1/>
       {/* <NavBar userData={userData} /> */}
       {/* <Routes>
         <Route path="/" element={<Login />} />

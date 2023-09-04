@@ -1,0 +1,27 @@
+.backButton {
+width: 34vw;
+height: fit-content;
+padding: 3vw 2vh;
+font-size: 7vw;
+text-align: center;
+position: relative;
+background: transparent;
+}
+
+.backButton::before {
+    content: "";
+    position: absolute;
+    border: 0.8vw solid black;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    transform: skew(-20deg);
+    background-color: #ecc508;
+  }
+
+.link{
+    text-decoration: none;
+    color: inherit;
+}

@@ -1,0 +1,41 @@
+.qrDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 83vh;
+    /* width:fit-content; */
+}
+
+.qrImg {
+    width:60vw;
+}
+
+.qrImgDiv{
+    width: 60vw;
+    height: fit-content;
+    padding: 3vw 2vh;
+    position: relative;
+    background: transparent;
+    display:flex;
+    justify-content: center;
+    /* background-color:red; */
+}
+/* .qrImgDiv::before {
+    content: "";
+    position: absolute;
+    border: 0.8vw solid black;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    transform: skew(-20deg);
+    background-color: #F3F3F3;
+      } */
+
+
+.backButton{
+    position:relative;
+    margin-top: 60vh;
+}

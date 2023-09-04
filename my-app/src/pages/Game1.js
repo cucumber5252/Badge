@@ -1,10 +1,10 @@
-import './Game1.module.css';
+import styles from './Game1.module.css';
 import {useEffect, useState} from 'react';
 
-import yourCard from '../../assets/Game1/yourCard.svg';
-import scissor from '../../assets/Game1/scissor.svg';
-import rock from '../../assets/Game1/scissor.svg';
-import paper from '../../assets/Game1/paper.svg';
+import yourCard from '../assets/Game1/yourCard.svg';
+import scissor from '../assets/Game1/scissor.svg';
+import rock from '../assets/Game1/scissor.svg';
+import paper from '../assets/Game1/paper.svg';
 
 function Game1() {
     let [timeLeft, setTimeLeft] = useState(5);
@@ -21,6 +21,7 @@ function Game1() {
     function paperChoiceHandler() {
         setChoice('paper')
     }
+    
     useEffect( () => {
         //설정된 시간 간격마다 SetInterval 콜백이 실행된다.
         const id = setInterval(() =>{
@@ -38,9 +39,9 @@ function Game1() {
 
     return (
     <>
-    <div>
+    <div className={styles.container}>
         <div>
-            <div>
+            <div className={styles.yourSelection}>
                 <span>상대도 선택 중</span>
             </div>
             <div>
@@ -57,16 +58,16 @@ function Game1() {
             </div>
         </div>
 
-        <div>
-            <div onClick={scissorChoiceHandler}>
+        <div className={styles.cards}>
+            <div className={styles.card} onClick={scissorChoiceHandler}>
                 <img src={scissor} alt="scissor"/>
                 <div>가위</div>
             </div>
-            <div onClick={rockChoiceHandler}>
+            <div className={styles.card} onClick={rockChoiceHandler}>
                 <img src={rock} alt="rock"/>
                 <div>바위</div>
             </div>
-            <div onClick={paperChoiceHandler}>
+            <div className={styles.card} onClick={paperChoiceHandler}>
                 <img src={paper} alt="paper"/>
                 <div>보</div>
             </div>

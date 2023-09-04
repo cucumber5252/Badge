@@ -1,12 +1,12 @@
 import './Game2.module.css';
 import {useState} from 'react';
 
-import yourCard from '../../assets/Game2/yourCard.svg';
-import scissor from '../../assets/Game2/scissor.svg';
-import rock from '../../assets/Game2/scissor.svg';
-import paper from '../../assets/Game2/paper.svg';
+import yourCard from '../assets/Game2/yourCard.svg';
+import scissor from '../assets/Game2/scissor.svg';
+import rock from '../assets/Game2/scissor.svg';
+import paper from '../assets/Game2/paper.svg';
 
-import Back from '../Back/Back';
+import Back from './Back';
 
 function Game2() {
 
@@ -15,7 +15,6 @@ function Game2() {
     return (
     <>
     <div>
-
         <div>
             <img src={rock} alt="rock"/>
             <div>가위</div>
