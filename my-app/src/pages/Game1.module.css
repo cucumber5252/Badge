@@ -4,13 +4,51 @@
     align-items: center;
     justify-content: center;
     height: 83vh;
+    font-size: 6vw;
+}
+
+.yourCardImg{
+    width: 20vw;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.timeLeftDiv{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;
+}
+
+.timeLeft{
+    text-align:center;
+    font-size: 20vw;
 }
 
 .card{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width:26vw;
+    height:21vh;
+    background-color:#F3F3F3;
+    border-radius: 10px;
+
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+/* .myCardImg{
+
+} */
 .cards{
     display: flex;
+    width: 90vw;
+    justify-content:space-between;
+
+}
+
+.myCardImg{
+    width:22vw;
+    margin-bottom:3vh;
 }

@@ -49,8 +49,8 @@ function Game1() {
             </div>
         </div>
 
-        <div>
-            <div>
+        <div className={styles.timeLeftDiv} >
+            <div className={styles.timeLeft}>
                 {timeLeft}
             </div>
             <div>
@@ -60,15 +60,15 @@ function Game1() {
 
         <div className={styles.cards}>
             <div className={styles.card} onClick={scissorChoiceHandler}>
-                <img src={scissor} alt="scissor"/>
+                <img className={styles.myCardImg} src={scissor} alt="scissor"/>
                 <div>가위</div>
             </div>
             <div className={styles.card} onClick={rockChoiceHandler}>
-                <img src={rock} alt="rock"/>
+                <img className={styles.myCardImg} src={rock} alt="rock"/>
                 <div>바위</div>
             </div>
             <div className={styles.card} onClick={paperChoiceHandler}>
-                <img src={paper} alt="paper"/>
+                <img className={styles.myCardImg} src={paper} alt="paper"/>
                 <div>보</div>
             </div>
         </div>
