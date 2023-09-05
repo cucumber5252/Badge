@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
 import TitleImg from "../assets/Login/TitleImg.svg";
 
@@ -6,6 +7,7 @@ const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false);
+  const navigate = useNavigate();
 
   const handleIdChange = (e) => {
     setId(e.target.value);
@@ -17,7 +19,26 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //fetch 만들기
+
+    const apiUrl = "/api/user/login/";
+
+    fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+
+      body: JSON.stringify({
+        userId: id,
+        password,
+      }),
+
+      mode: "cors",
+    })
+      .then((response) => response.json())
+      .then(() => navigate("/home"))
+      .catch((error) => {
+        console.log(error);
+        setShowError(true);
+      });
   };
 
   return (
@@ -44,12 +65,14 @@ const Login = () => {
         </div>
       </form>
 
-      <div className={styles.loginButton}>
+      <div className={styles.loginButton} onClick={handleSubmit}>
         로그인하기
         {showError && <div className={styles.errorMessage}>*땡 틀렸습니다</div>}
       </div>
 
-      <div className={styles.signupButton}>회원가입</div>
+      <Link to="/signup" className={styles.signupButton}>
+        회원가입
+      </Link>
     </div>
   );
 };

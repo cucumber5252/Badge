@@ -27,9 +27,9 @@ const NavBar = ({ userData }) => {
           <div className={styles.flexDiv1}>
             <div className={styles.profileDiv}>
               {univ === "korea" ? (
-                <img src={TigerImg} className={styles.profileImg} alt="" />
+                <img src={TigerImg} className={styles.profileTigerImg} alt="" />
               ) : (
-                <img src={EagleImg} className={styles.profileImg} alt="" />
+                <img src={EagleImg} className={styles.profileEagleImg} alt="" />
               )}
               <div className={styles.profileText}>{nickname}</div>
             </div>
@@ -92,7 +92,6 @@ const NavBar = ({ userData }) => {
           )}
         </div>
       </div>
-      <div className={styles.test}>adf</div>
     </>
   );
 };

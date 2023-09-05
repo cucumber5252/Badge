@@ -52,6 +52,8 @@
   text-align: center;
   position: relative;
   background: transparent;
+  text-decoration: none;
+  color: black;
 }
 
 .loginButton::before,
@@ -64,7 +66,7 @@
   bottom: 0;
   left: 0;
   z-index: -1;
-  transform: skew(-20deg);
+  transform: skew(-15deg);
 }
 
 .loginButton::before {
@@ -73,12 +75,6 @@
 
 .signupButton::before {
   background-color: #f4e286;
-}
-
-.loginButton:hover,
-.signupButton:hover {
-  z-index: 1;
-  text-decoration: underline;
 }
 
 .loginButton {

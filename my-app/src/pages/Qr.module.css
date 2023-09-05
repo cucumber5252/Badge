@@ -1,0 +1,51 @@
+.qrDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 83vh;
+}
+
+.qrImgDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 30vh;
+  width: 70vw;
+
+  font-size: 7vw;
+
+  text-decoration: none;
+  color: black;
+
+  position: relative;
+  background: transparent;
+
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  margin: 5vh 0;
+}
+
+.qrImgDiv::before {
+  content: "";
+  position: absolute;
+  border: 0.5vw solid black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transform: skew(-15deg);
+  background-color: #f3f3f3;
+}
+
+.qrImg {
+  width: 45vw;
+}
+
+.qrText {
+  font-size: 7vw;
+  margin-bottom: 5vh;
+}

@@ -9,10 +9,14 @@ import blueBack from "./assets/Backgrounds/blue.png";
 import purpleBack from "./assets/Backgrounds/purple.png";
 
 import Login from "./pages/Login";
+import Logout from "./pages/Logout";
 import Signup from "./pages/Signup";
+import Present from "./pages/Present";
+import KingLoading from "./pages/KingLoading";
+import Qr from "./pages/Qr";
 
 const App = () => {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
@@ -32,7 +36,7 @@ const App = () => {
         setUserData(data);
       })
       .catch((error) => {
-        alert("이미 사용중인 아이디입니다.");
+        console.log(error);
       });
   }, []);
 
@@ -53,23 +57,45 @@ const App = () => {
   //   document.body.style.backgroundSize = "cover";
   // }, [selectedBackground]);
 
+  document.body.style.backgroundColor = "#FCFCF6";
+
   return (
     <>
-      <Signup />
-      {/* <NavBar userData={userData} /> */}
-      {/* <Routes>
+      <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Routes>
-          <NavBar userData={userData} />
-          <Route path="/present" element={<Present />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/rule" element={<Rule />} />
-          <Route path="/ranker" element={<Ranker />} />
-          <Route path="/kingGame" element={<KingGame />} />
-          <Route path="/kingGameLoading" element={<KingGameLoading />} />
-        </Routes>
-      </Routes> */}
+        <Route
+          path="/logout"
+          element={<Logout setIsLoggedIn={setIsLoggedIn} />}
+        />
+        <Route
+          path="/present"
+          element={
+            <div>
+              <NavBar userData={userData} />
+              <Present />
+            </div>
+          }
+        />
+        <Route
+          path="/kingLoading"
+          element={
+            <div>
+              <NavBar userData={userData} />
+              <KingLoading />
+            </div>
+          }
+        />
+        <Route
+          path="/qr"
+          element={
+            <div>
+              <NavBar userData={userData} />
+              <Qr />
+            </div>
+          }
+        />
+      </Routes>
     </>
   );
 };
