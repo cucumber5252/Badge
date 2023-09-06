@@ -1,42 +1,55 @@
-import './Game2.module.css';
-import {useState} from 'react';
+import styles from "./Game2.module.css";
+import { useState } from "react";
 
-import yourCard from '../assets/Game2/yourCard.svg';
-import scissor from '../assets/Game2/scissor.svg';
-import rock from '../assets/Game2/scissor.svg';
-import paper from '../assets/Game2/paper.svg';
+import scissor from "../assets/Game2/scissor.svg";
+import rock from "../assets/Game2/rock.svg";
+import paper from "../assets/Game2/paper.svg";
 
-import Back from './Back';
+import Back from "./Back";
 
 function Game2() {
+  let opChoice = "rock"; //백에서 가져와야함
+  let myChoice = "paper"; //백에서 가져와야함
+  let result = "win";
 
-    const [outcome, setOutcome] = useState('test');
-    // setOutcome('백에서가져온값');
-    return (
+  return (
     <>
-    <div>
+      <div className={styles.container}>
         <div>
-            <img src={rock} alt="rock"/>
-            <div>가위</div>
+          <div className={styles.card}>
+            {opChoice === "scissor" ? (
+              <img src={scissor} alt={opChoice} className={styles.cardImg} />
+            ) : opChoice === "rock" ? (
+              <img src={rock} alt={opChoice} className={styles.cardImg} />
+            ) : (
+              <img src={paper} alt={opChoice} className={styles.cardImg} />
+            )}
+          </div>
+          <div>{opChoice}</div>
+        </div>
+        <div>
+          <div>
+            <div>{result}</div>
+          </div>
         </div>
 
-
         <div>
-            <div>
-                <div>win</div>
-            </div>
+          <div className={styles.card}>
+            {myChoice === "scissor" ? (
+              <img src={scissor} alt={opChoice} className={styles.cardImg} />
+            ) : myChoice === "rock" ? (
+              <img src={rock} alt={opChoice} className={styles.cardImg} />
+            ) : (
+              <img src={paper} alt={opChoice} className={styles.cardImg} />
+            )}
+          </div>
+          <div>{myChoice}</div>
         </div>
+      </div>
 
-        <div>
-            <img src={scissor} alt="scissor"/>
-            <div>가위</div>
-        </div>
-
-    </div>
-
-    <Back to=""/>
+      <Back to={useState(-1)} />
     </>
-    );
+  );
 }
 
 export default Game2;

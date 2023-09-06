@@ -17,9 +17,6 @@ import Game2 from "./pages/Game2";
 // import Loading1 from "./pages/Loading1";
 // import Back from "./pages/Back";
 
-
-
-
 const App = () => {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState([]);
@@ -64,7 +61,7 @@ const App = () => {
 
   return (
     <>
-      <Game1/>
+      <Game2 />
       {/* <NavBar userData={userData} /> */}
       {/* <Routes>
         <Route path="/" element={<Login />} />

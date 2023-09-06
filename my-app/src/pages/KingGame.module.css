@@ -11,6 +11,14 @@
   display: flex;
   justify-content: center;
 }
+
+.yourCardDiv {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .yourCardImg {
   margin-top: 2vh;
   width: 40vw;
@@ -57,9 +65,6 @@
   background-color: #d1cece;
 }
 
-/* .myCardImg{
-
-} */
 .cards {
   display: flex;
   width: 90vw;

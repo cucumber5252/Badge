@@ -1,20 +1,19 @@
-import styles from "./Game1.module.css";
+import styles from "./KingGame.module.css";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import yourCard from "../assets/Game1/yourCard.svg";
 import scissor from "../assets/Game1/scissor.svg";
 import rock from "../assets/Game1/rock.svg";
 import paper from "../assets/Game1/paper.svg";
 
-function Game1() {
+function KingGame() {
   let [timeLeft, setTimeLeft] = useState(5);
-  let [choice, setChoice] = useState("rock");
+  let [choice, setChoice] = useState("");
   let [outcome, setOutcome] = useState("");
 
-  let userId = "testUserId";
-  let roomId = "testRoomId";
+  const navigate = useNavigate();
 
-  //가위바위보 선택 test
   useEffect(() => {
     console.log(choice);
   }, [choice]);
@@ -26,6 +25,7 @@ function Game1() {
       //타이머 숫자가 하나씩 줄어들도록
       setTimeLeft((timeLeft) => timeLeft - 1);
     }, 1000);
+
     //0이 되면 카운트다운 멈춤
     if (timeLeft === 0) {
       clearInterval(id);
@@ -38,13 +38,13 @@ function Game1() {
   const FetchChoice = () => {
     if (timeLeft === 0) {
       //서버와 통신//
-      const apiUrl = "";
+      const apiUrl =
+        "https://port-0-badgeback-jvvy2blm6d8yj1.sel5.cloudtype.app/api/game/god-game/";
 
       const token = localStorage.getItem("token");
+
       const bodyToFetch = {
         choice,
-        roomId,
-        userId,
       };
 
       //choice를 서버에 보내는 것은, 시간이 0초가 되었을 때임.
@@ -89,9 +89,11 @@ function Game1() {
       <div className={styles.container}>
         <div>
           <div className={styles.yourSelection}>
-            <span className={styles.span1}>상대도 선택 중</span>
+            <span className={styles.span1}>
+              옥황상제는 이미 패를 골랐습니다.
+            </span>
           </div>
-          <div>
+          <div className={styles.yourCardDiv}>
             <img className={styles.yourCardImg} src={yourCard} alt="yourCard" />
           </div>
         </div>
@@ -137,4 +139,4 @@ function Game1() {
   );
 }
 
-export default Game1;
+export default KingGame;
