@@ -1,0 +1,141 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 83vh; /* 화면 높이 전체를 커버하도록 설정 */
+}
+.ranker {
+  width: 90vw;
+  height: 70vh;
+  /* overflow: scroll; */
+  background-color: #f3f3f3;
+  z-index: -1;
+  display: flex; /* 내부 요소를 가로로 나란히 배치하기 위해 flex 사용 */
+  flex-direction: column;
+  align-items: center; /* 수직 가운데 정렬 */
+}
+.me {
+  height: 6vh;
+  width: 90vw;
+  background-color: #343c4f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  font-size: 3vh;
+}
+.top20 {
+  position: relative;
+  background: transparent;
+  width: 18vw;
+  height: 3vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 0.5vh;
+}
+
+.top20::before {
+  background-color: #343c4f;
+  content: "";
+  position: absolute;
+  border: 0.5vw solid black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transform: skew(-20deg);
+}
+.profile {
+  width: 13vw;
+  margin-right: 2.5vw;
+}
+.count {
+  background-color: #ecc508;
+  width: 3.5vw;
+  height: 13vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.individual {
+  position: relative;
+  background: transparent;
+  width: 75vw;
+  height: 13vw;
+  font-size: 5.5vw;
+  color: rgb(0, 0, 0);
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  text-align: center;
+}
+.individual::before {
+  background-color: #f3f3f3;
+  content: "";
+  position: absolute;
+  border: 0.5vw solid black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transform: skew(-20deg);
+}
+.column {
+  display: flex;
+  margin-top: 1vh;
+}
+.badge {
+  position: absolute;
+  right: 4vh;
+  background: transparent;
+  width: 15vw;
+  height: 8vw;
+  font-size: 3vw;
+  color: rgb(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.badge::before {
+  background-color: #ecc508;
+  content: "";
+  position: absolute;
+  border: 0.5vw solid black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transform: skew(-20deg);
+}
+.getbadge {
+  position: absolute;
+  right: 1vh;
+  background: transparent;
+  width: 8vw;
+  height: 8vw;
+  font-size: 3.5vw;
+  color: rgb(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.getbadge::before {
+  background-color: #dd7800;
+  content: "";
+  position: absolute;
+  border: 0.5vw solid black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transform: skew(-20deg);
+}

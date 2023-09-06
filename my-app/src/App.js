@@ -1,11 +1,12 @@
-import Test from "./pages/test.js";
+import Home from "./pages/home.js";
+import Rule from "./pages/rule.js";
+import Ranker from "./pages/ranker.js";
 
 const App = () => {
   return (
     <>
-      <Test />
+      <Ranker />
     </>
   );
 };
-
 export default App;

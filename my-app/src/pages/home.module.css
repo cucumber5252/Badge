@@ -1,0 +1,182 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 83vh; /* 화면 높이 전체를 커버하도록 설정 */
+}
+.rounded {
+  width: 95vw;
+  height: 20vh;
+  border-radius: 9vh;
+  background-color: #343c4f;
+  display: flex;
+  flex-direction: column; /* 내부 요소들을 수직으로 배치하기 위해 추가 */
+  align-items: center;
+  z-index: -2;
+}
+.text {
+  color: white;
+  font-size: 3.2vh;
+  margin-top: 2.5vh;
+}
+.total {
+  display: flex;
+  justify-content: center;
+  margin-top: -1vh;
+  margin-bottom: 0.5vh;
+}
+.total img {
+  display: inline-block;
+  width: 10vh;
+  margin-right: 22vh;
+}
+.total img:last-child {
+  margin-right: 0; /* 마지막 이미지의 마진을 없앰 */
+}
+.crown {
+  width: 7vh;
+  margin-top: -15vh;
+  margin-left: -68vw;
+}
+.crown2 {
+  width: 7vh;
+  margin-top: -15vh;
+  margin-left: 70vw;
+}
+.crown3 {
+  width: 7vh;
+  margin-top: -15vh;
+  visibility: hidden;
+}
+.ranker {
+  position: relative;
+  background: transparent;
+  width: 18vw;
+  height: 3vh;
+  color: rgb(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -4.2vh;
+  text-decoration: none;
+}
+.ranker::before {
+  background-color: #ecc508;
+  content: "";
+  position: absolute;
+  border: 0.5vw solid black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transform: skew(-20deg);
+}
+.text2 {
+  font-size: 2.5vh;
+  margin-right: 20vh;
+}
+.text2:last-child {
+  margin-right: 0;
+}
+.game {
+  flex: 1;
+  width: 34vw;
+  height: 5vh;
+  padding: 3vw 2vh;
+  font-size: 6vw;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: transparent;
+  margin-top: -3vh;
+  color: black;
+  text-decoration: none;
+}
+.game::before {
+  content: "";
+  position: absolute;
+  border: 0.8vw solid black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transform: skew(-20deg);
+  background-color: #ecc508;
+}
+.rockscissorpaper img {
+  margin-top: 7vh;
+  width: 30vw;
+}
+.rule {
+  flex: 0;
+  width: 5vw;
+  height: 2vh;
+  padding: 3vw 2vh;
+  font-size: 6vw;
+  position: absolute;
+  background: transparent;
+  color: black;
+  text-decoration: none;
+  left: 72vw;
+}
+.rule::before {
+  content: "";
+  position: absolute;
+  border: 0.8vw solid black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transform: skew(-20deg);
+  background-color: #f3f3f3;
+}
+.link {
+  display: flex;
+  align-items: center; /* 수직 가운데 정렬 */
+  justify-content: center;
+}
+.ratioBar {
+  display: flex;
+  width: 65vw;
+  height: 7vh;
+  background: #343c4f;
+  margin-bottom: 1vh;
+  z-index: -1;
+  position: relative;
+}
+.ratioKorea {
+  background-color: #ec7676;
+  height: 100%;
+  width: 50%;
+  transform: skewX(-20deg);
+  border-radius: 2px 0 0 2px;
+  display: flex;
+  justify-content: flex-end; /* 가로 정렬을 오른쪽으로 설정 */
+  align-items: flex-end; /* 세로 정렬을 아래로 설정 */
+  position: absolute; /* 부모 요소 기준으로 위치 조정 */
+  left: 0; /* 왼쪽 끝에 배치 */
+}
+.ratioYonsei {
+  transform: skewX(-20deg);
+  background-color: #7690ec;
+  height: 100%;
+  width: 50%;
+  border-radius: 0 2px 2px 0;
+  display: flex;
+  justify-content: flex-start; /* 가로 정렬을 오른쪽으로 설정 */
+  align-items: flex-end; /* 세로 정렬을 아래로 설정 */
+  position: absolute; /* 부모 요소 기준으로 위치 조정 */
+  right: 0; /* 왼쪽 끝에 배치 */
+}
+.count {
+  font-size: 1.5vh;
+  margin-bottom: 0.2vh;
+  margin-left: 0.6vh;
+  margin-right: 0.6vh;
+  transform: skewX(20deg); /* 휘어짐을 초기화 */
+}
