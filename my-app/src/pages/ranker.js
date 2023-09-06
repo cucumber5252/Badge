@@ -8,6 +8,18 @@ function Ranker() {
   const [rankData, setRankData] = useState([
     { nickname: "초전도대학생", univ: "korea", getBadge: 10, rank: 1 },
     { nickname: "고려대학생", univ: "yonsei", getBadge: 9, rank: 2 },
+    { nickname: "연새대병신", univ: "korea", getBadge: 9, rank: 3 },
+    { nickname: "고잡대", univ: "yonsei", getBadge: 8, rank: 4 },
+    { nickname: "연세대화이팅", univ: "korea", getBadge: 6, rank: 5 },
+    { nickname: "연새대병신", univ: "korea", getBadge: 9, rank: 6 },
+    { nickname: "고잡대", univ: "yonsei", getBadge: 8, rank: 7 },
+    { nickname: "연세대화이팅", univ: "korea", getBadge: 6, rank: 8 },
+    { nickname: "연새대병신", univ: "korea", getBadge: 9, rank: 9 },
+    { nickname: "고잡대", univ: "yonsei", getBadge: 8, rank: 10 },
+    { nickname: "연세대화이팅", univ: "korea", getBadge: 6, rank: 11 },
+    { nickname: "연새대병신", univ: "korea", getBadge: 9, rank: 12 },
+    { nickname: "고잡대", univ: "yonsei", getBadge: 8, rank: 13 },
+    { nickname: "연세대화이팅", univ: "korea", getBadge: 6, rank: 14 },
   ]);
   const [myRank, setMyRank] = useState(872);
 
@@ -55,26 +67,23 @@ function Ranker() {
           <div className={styles.me}>MY RANK : {myRank}위</div>
           <div className={styles.top20}>TOP 20</div>
           <div className={styles.users}>
-            {/* <div className={styles.user1}> */}
-            <div>
-              {rankData.univ === "korea" ? (
-                <img src={Tiger} className={styles.profile} />
-              ) : (
-                <img src={Eagle} className={styles.profile} />
-              )}
-            </div>
-            {/* </div> */}
-            <div className={styles.column}>
-              <div className={styles.count}>1</div>
-              <div className={styles.individual}>
-                <img src={Tiger} className={styles.profile}></img>
-                {/* {rankData.rankers[0][1]} */}
-                초전도대학생
-                <div className={styles.badge}>뺏은뱃지</div>{" "}
-                <div className={styles.getbadge}>120</div>
-                {/* <div>{rankData.rankers[0][2]}</div> */}
+            {rankData.map((item, index) => (
+              <div key={index} className={styles.listItem}>
+                <div className={styles.column}>
+                  <div className={styles.count}>{item.rank}</div>
+                  <div className={styles.individual}>
+                    {item.univ === "korea" ? (
+                      <img src={Tiger} className={styles.profile} />
+                    ) : (
+                      <img src={Eagle} className={styles.profile} />
+                    )}
+                    {item.nickname}
+                    <div className={styles.badge}>뺏은뱃지</div>
+                    <div className={styles.getbadge}>{item.getBadge}</div>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
