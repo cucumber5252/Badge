@@ -13,7 +13,11 @@ export default function Game1() {
   const [choice, setChoice] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const { socket, userId, roomId } = location.state || {};
+  const { socket, userId, roomId, role } = location.state || {};
+
+  useEffect(() => {
+    socket.emit("refresh", { roomId, role });
+  }, []);
 
   const FetchChoice = () => {
     socket.emit("choice", { choice, userId, roomId });
@@ -26,7 +30,7 @@ export default function Game1() {
 
     socket.once("gameResult", (data) => {
       //Game2.js
-      navigate("/game2", { state: { socket, data, roomId } });
+      navigate("/game2", { state: { socket, data, roomId, userId, role } });
     });
   };
 

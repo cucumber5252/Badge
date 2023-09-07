@@ -20,6 +20,10 @@ function Qr() {
   const userId = localStorage.getItem("userId");
   const [state, setState] = useState(false);
 
+  useEffect(() => {
+    socket.emit("refresh", { roomId, role });
+  }, []);
+
   console.log(roomId, visitorSocket, role, myData, userId);
   //배경랜덤지정코드
   const backgroundImages = [
@@ -54,7 +58,7 @@ function Qr() {
       if (data.status === "sucess") {
         //go to startGame
         navigate("/loading1", {
-          state: { socket, opData: data.opData, myData, roomId },
+          state: { socket, opData: data.opData, myData, roomId, role },
         });
       }
     });
@@ -87,6 +91,7 @@ function Qr() {
                 opData: data.opData,
                 myData,
                 roomId,
+                role,
               },
             });
           } else if (data.status === "pending") {
@@ -99,6 +104,7 @@ function Qr() {
                     opData: data.opData,
                     myData,
                     roomId,
+                    role,
                   },
                 });
               }
@@ -111,7 +117,7 @@ function Qr() {
         connectionForVisitor();
       } else {
         //go to signup with roomId
-        navigate("/signup", { state: { myData, socket, roomId } });
+        navigate("/signup", { state: { myData, socket, roomId, role } });
       }
     }
   });

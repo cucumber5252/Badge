@@ -4,11 +4,12 @@ import styles from "./Loading1.module.css";
 import eagle from "../assets/Loading1/eagle.svg";
 import tiger from "../assets/Loading1/tiger.svg";
 import mystery from "../assets/Loading1/mystery.svg";
+import { useEffect } from "react";
 // import Back from "../components/Back/Back";
 
 const Loading1 = () => {
   const location = useLocation();
-  const { socket, opData, myData, roomId } = location.state || {};
+  const { socket, opData, myData, roomId, role } = location.state || {};
   const userId = myData.userId;
 
   const navigate = useNavigate();
@@ -27,9 +28,13 @@ const Loading1 = () => {
   socket.once("activateGame", (data) => {
     if (data.state === "success") {
       //go to game1 ''choice''
-      navigate("/game1", { state: { socket, userId, roomId } });
+      navigate("/game1", { state: { socket, userId, roomId, role } });
     }
   });
+
+  useEffect(() => {
+    socket.emit("refresh", { roomId, role });
+  }, []);
 
   const onClick = (e) => {
     e.preventDefault();

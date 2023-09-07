@@ -1,5 +1,5 @@
 import styles from "./Game2.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import scissor from "../assets/Game2/scissor.svg";
 import rock from "../assets/Game2/rock.svg";
@@ -15,12 +15,15 @@ function Game2() {
   const location = useLocation;
   const navigate = useNavigate();
   const [isDraw, setIsDraw] = useState(false);
-  const { socket, data, roomId, userId } = location.state || {};
+  const { socket, data, roomId, userId, role } = location.state || {};
 
   let opChoice = data.opChoice; //백에서 가져와야함
   let myChoice = data.myChoice; //백에서 가져와야함
   let result = data.result;
 
+  useEffect(() => {
+    socket.emit("refresh", { roomId, role });
+  }, []);
   ///한국어로 가위 바위 보 결과 저장
   let koreanOpChoice =
     opChoice === "scissor" ? "가위" : opChoice === "rock" ? "바위" : "보";
@@ -31,7 +34,7 @@ function Game2() {
   if (result === "draw") {
     setIsDraw(true);
     setTimeout(() => {
-      navigate("/game1", { state: { socket, roomId, userId } });
+      navigate("/game1", { state: { socket, roomId, userId, role } });
     }, 3000);
   } else {
     socket.disconnect();
