@@ -7,13 +7,14 @@ import yourCard from "../assets/Game1/yourCard.svg";
 import scissor from "../assets/Game1/scissor.svg";
 import rock from "../assets/Game1/rock.svg";
 import paper from "../assets/Game1/paper.svg";
+import socket from "./socket";
 
 export default function Game1() {
   const [timeLeft, setTimeLeft] = useState("");
   const [choice, setChoice] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const { socket, userId, roomId } = location.state || {};
+  const { userId, roomId } = location.state || {};
 
   const FetchChoice = () => {
     socket.emit("choice", { choice, userId, roomId });
@@ -26,7 +27,7 @@ export default function Game1() {
 
     socket.once("gameResult", (data) => {
       //Game2.js
-      navigate("/game2", { state: { socket, data, roomId } });
+      navigate("/game2", { state: { data, roomId } });
     });
   };
 

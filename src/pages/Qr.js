@@ -1,10 +1,9 @@
 import styles from "./Qr.module.css";
-
+import socket from "./socket";
 import Back from "../components/Back/Back";
 
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { io } from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 
 import yellowBack from "../assets/Backgrounds/yellow.png";
@@ -16,11 +15,12 @@ import purpleBack from "../assets/Backgrounds/purple.png";
 function Qr() {
   const [qrCode, setQrcode] = useState("");
   const location = useLocation();
-  const { roomId, visitorSocket, role, myData } = location.state || {};
+  const { roomId, role, myData } = location.state || {};
   const userId = localStorage.getItem("userId");
-  const [state, setState] = useState(false);
+  const [create, setCreate] = useState(false);
+  const [join, setJoin] = useState(false);
+  console.log(roomId, role, myData, userId);
 
-  console.log(roomId, visitorSocket, role, myData, userId);
   //배경랜덤지정코드
   const backgroundImages = [
     yellowBack,
@@ -29,7 +29,6 @@ function Qr() {
     redBack,
     greenBack,
   ];
-
   // 랜덤 이미지 선택
   const randomIndex = Math.floor(Math.random() * backgroundImages.length);
   const selectedBackground = backgroundImages[randomIndex];
@@ -41,12 +40,16 @@ function Qr() {
 
   //
   useEffect(() => {
-    if (state) socket.emit("createGame", { roomId });
-  }, [state]);
+    console.log("createGame");
+    if (create) socket.emit("createGame", { userId });
+  }, [create]);
+  useEffect(() => {
+    console.log("visitor");
+    if (join) connectionForVisitor();
+  }, [join]);
 
   const apiUrl = "https://port-0-badgeback-jvvy2blm6d8yj1.sel5.cloudtype.app/";
   const navigate = useNavigate();
-  let socket;
 
   const connectionForVisitor = () => {
     socket.emit("joinGame", { roomId, userId });
@@ -54,67 +57,61 @@ function Qr() {
       if (data.status === "sucess") {
         //go to startGame
         navigate("/loading1", {
-          state: { socket, opData: data.opData, myData, roomId },
+          state: { opData: data.opData, myData, roomId },
         });
       }
     });
   };
-
-  if (!visitorSocket) {
-    socket = io(apiUrl, {
-      cors: { origin: "*" },
-    });
-  } else {
-    socket = visitorSocket;
-    connectionForVisitor();
-  }
-
-  socket.on("connect", (data) => {
-    console.log("connect to server", socket.id);
-
+  useEffect(() => {
     if (role === "creator") {
-      setState(true);
-
-      socket.once("createGame", (data) => {
-        setQrcode(data.qrCode);
-        console.log("gameRoom", data.roomId);
-        socket.once("waiting", (data) => {
-          if (data.status === "success") {
-            //go to startGame
-            navigate("/loading1", {
-              state: {
-                socket,
-                opData: data.opData,
-                myData,
-                roomId,
-              },
-            });
-          } else if (data.status === "pending") {
-            //wait for user sign up
-            socket.once("waiting", (data) => {
-              if (data.status === "success") {
-                navigate("/loading1", {
-                  state: {
-                    socket,
-                    opData: data.opData,
-                    myData,
-                    roomId,
-                  },
-                });
-              }
-            });
-          }
-        });
-      });
-    } else if (!role || role === "visitor") {
+      setCreate(true);
+    }
+  }, [role]);
+  useEffect(() => {
+    if (!role || role === "visitor") {
       if (userId) {
-        connectionForVisitor();
-      } else {
-        //go to signup with roomId
-        navigate("/signup", { state: { myData, socket, roomId } });
+        setJoin(true);
       }
     }
-  });
+  }, [role, userId]);
+
+  if (role === "creator") {
+    socket.once("createGame", (data) => {
+      setQrcode(data.qrCode);
+      console.log("gameRoom", data.roomId);
+      socket.once("waiting", (data) => {
+        if (data.status === "success") {
+          //go to startGame
+          navigate("/loading1", {
+            state: {
+              opData: data.opData,
+              myData,
+              roomId,
+            },
+          });
+        } else if (data.status === "pending") {
+          //wait for user sign up
+          socket.once("waiting", (data) => {
+            if (data.status === "success") {
+              navigate("/loading1", {
+                state: {
+                  opData: data.opData,
+                  myData,
+                  roomId,
+                },
+              });
+            }
+          });
+        }
+      });
+    });
+  } else if (!role || role === "visitor") {
+    if (userId) {
+    } else {
+      //go to signup with roomId
+      navigate("/signup", { state: { myData, roomId } });
+    }
+  }
 
   return (
     <div className={styles.qrDiv}>

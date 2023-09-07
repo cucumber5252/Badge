@@ -7,7 +7,7 @@ import EagleImg from "../assets/Signup/EagleImg.svg";
 import ShadowTigerImg from "../assets/Signup/ShadowTigerImg.svg";
 import ShadowEagleImg from "../assets/Signup/ShadowEagleImg.svg";
 
-const Signup = ({ myData, socket, roomId }) => {
+const Signup = ({ myData, roomId }) => {
   const [univ, setUniv] = useState(null);
   const [nickname, setNickname] = useState("");
   const [id, setId] = useState("");
@@ -121,7 +121,7 @@ const Signup = ({ myData, socket, roomId }) => {
       })
       .then(() => {
         if (roomId) {
-          navigate("/qr", { state: { myData, visitorSocket: socket, roomId } });
+          navigate("/qr", { state: { myData, roomId } });
           return;
         }
 

@@ -10,12 +10,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import HomeButton from "../components/HomeButton/HomeButton";
 import Refight from "../components/Refight/Refight";
+import socket from "./socket";
 
 function Game2() {
   const location = useLocation;
   const navigate = useNavigate();
   const [isDraw, setIsDraw] = useState(false);
-  const { socket, data, roomId, userId } = location.state || {};
+  const { data, roomId, userId } = location.state || {};
 
   let opChoice = data.opChoice; //백에서 가져와야함
   let myChoice = data.myChoice; //백에서 가져와야함
@@ -31,7 +32,7 @@ function Game2() {
   if (result === "draw") {
     setIsDraw(true);
     setTimeout(() => {
-      navigate("/game1", { state: { socket, roomId, userId } });
+      navigate("/game1", { state: { roomId, userId } });
     }, 3000);
   } else {
     socket.disconnect();
