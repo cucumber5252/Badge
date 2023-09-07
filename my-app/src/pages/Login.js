@@ -35,15 +35,21 @@ const Login = () => {
       body: JSON.stringify(bodyToFetch),
       mode: "cors",
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
         console.log("Parse complete:", data);
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", id);
       })
       .then(() => {
+        console.log(localStorage.getItem("token"));
         if (localStorage.getItem("token")) {
-          navigate("/home");
+          navigate("/main");
         }
       })
       .catch((error) => {

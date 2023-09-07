@@ -10,6 +10,7 @@ const Logout = ({ setIsLoggedIn }) => {
 
     // 토큰 삭제
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
 
     // 로그인 페이지로 리디렉션
     navigate("/");

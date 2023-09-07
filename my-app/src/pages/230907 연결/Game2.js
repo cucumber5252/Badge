@@ -6,15 +6,11 @@ import rock from "../assets/Game2/rock.svg";
 import paper from "../assets/Game2/paper.svg";
 
 import Back from "../components/Back/Back";
-import { useLocation } from "react-router-dom";
 
-function Game2() {
-  const location = useLocation;
-  const { socket, data } = location.state || {};
-
-  let opChoice = data.opChoice; //백에서 가져와야함
-  let myChoice = data.myChoice; //백에서 가져와야함
-  let result = data.result;
+function Game2(soket) {
+  let opChoice = "rock"; //백에서 가져와야함
+  let myChoice = "paper"; //백에서 가져와야함
+  let result = "draw";
 
   ///한국어로 가위 바위 보 결과 저장
   let koreanOpChoice =

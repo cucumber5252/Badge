@@ -1,14 +1,40 @@
 import styles from "./Qr.module.css";
-import qrExample from "../assets/Qr/qr_example.png";
 
 import Back from "../components/Back/Back";
 
-import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { io } from "socket.io-client";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Qr({ myData, visitorSocket, role, roomId }) {
+import yellowBack from "../assets/Backgrounds/yellow.png";
+import redBack from "../assets/Backgrounds/red.png";
+import greenBack from "../assets/Backgrounds/green.png";
+import blueBack from "../assets/Backgrounds/blue.png";
+import purpleBack from "../assets/Backgrounds/purple.png";
+
+function Qr() {
   const [qrCode, setQrcode] = useState("");
+  const location = useLocation();
+  const { roomId, visitorSocket, role, myData } = location.state || {};
+
+  const backgroundImages = [
+    yellowBack,
+    blueBack,
+    purpleBack,
+    redBack,
+    greenBack,
+  ];
+
+  // 랜덤 이미지 선택
+  const randomIndex = Math.floor(Math.random() * backgroundImages.length);
+  const selectedBackground = backgroundImages[randomIndex];
+
+  useEffect(() => {
+    document.body.style.backgroundImage = `url(${selectedBackground})`;
+    document.body.style.backgroundSize = "cover";
+  }, [selectedBackground]);
+
   const userId = localStorage.getItem("useId");
   const apiUrl = "https://port-0-badgeback-jvvy2blm6d8yj1.sel5.cloudtype.app/";
   const navigate = useNavigate();
@@ -19,7 +45,9 @@ function Qr({ myData, visitorSocket, role, roomId }) {
     socket.once("joinGame", (data) => {
       if (data.status === "sucess") {
         //go to startGame
-        navigate("/loading1", { socket, opData: data.opData, myData, roomId });
+        navigate("/loading1", {
+          state: { socket, opData: data.opData, myData, roomId },
+        });
       }
     });
   };
@@ -45,20 +73,24 @@ function Qr({ myData, visitorSocket, role, roomId }) {
           if (data.status === "success") {
             //go to startGame
             navigate("/loading1", {
-              socket,
-              opData: data.opData,
-              myData,
-              roomId,
+              state: {
+                socket,
+                opData: data.opData,
+                myData,
+                roomId,
+              },
             });
           } else if (data.status === "pending") {
             //wait for user sign up
             socket.once("wating", (data) => {
               if (data.status === "success") {
                 navigate("/loading1", {
-                  socket,
-                  opData: data.opData,
-                  myData,
-                  roomId,
+                  state: {
+                    socket,
+                    opData: data.opData,
+                    myData,
+                    roomId,
+                  },
                 });
               }
             });
@@ -70,7 +102,7 @@ function Qr({ myData, visitorSocket, role, roomId }) {
         connectionForVisitor();
       } else {
         //go to signup with roomId
-        navigate("/signup", { myData, socket, roomId });
+        navigate("/signup", { state: { myData, socket, roomId } });
       }
     }
   });

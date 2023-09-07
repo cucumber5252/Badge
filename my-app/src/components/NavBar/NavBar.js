@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 const NavBar = ({ userData, setUserData }) => {
   const [showSetting, setShowSetting] = useState(false);
 
-  const getBadgePercent = (userData.getBadge % 10) * 10;
+  const getBadgePercent = (userData.getBadge % 15) * 10;
   const fillWidth = `${getBadgePercent}%`;
 
   const handleSettingClick = (e) => {
@@ -25,7 +25,6 @@ const NavBar = ({ userData, setUserData }) => {
       "https://port-0-badgeback-jvvy2blm6d8yj1.sel5.cloudtype.app/api/game/statistic";
 
     const token = localStorage.getItem("token");
-    console.log(token);
 
     fetch(apiUrl, {
       method: "GET",
@@ -35,9 +34,13 @@ const NavBar = ({ userData, setUserData }) => {
       },
       mode: "cors",
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
-        console.log("data:", data);
         setUserData(data);
       })
       .catch((error) => {
@@ -118,9 +121,18 @@ const NavBar = ({ userData, setUserData }) => {
               <Link to="/logout" className={styles.settingOpenText1}>
                 로그아웃
               </Link>
-              <Link to="/developers" className={styles.settingOpenText2}>
+              <a
+                href="https://www.notion.so/routine-hy/70e746b080c946d3a0f3dd1761a1fc50"
+                className={styles.settingOpenText2}
+                onClick={(event) => {
+                  event.preventDefault();
+                  window.open(
+                    "https://www.notion.so/routine-hy/70e746b080c946d3a0f3dd1761a1fc50"
+                  );
+                }}
+              >
                 제작 이야기
-              </Link>
+              </a>
             </div>
           )}
         </div>

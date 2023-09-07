@@ -4,19 +4,18 @@ import crown from "../assets/Home/crown.svg";
 import rockscissorpaper from "../assets/Home/rockscissorpaper.svg";
 import tiger from "../assets/Home/tiger.svg";
 
-import Back from "../components/Back/Back";
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function Home() {
+function Main() {
   const [userData, setUserData] = useState("");
+  document.body.style.background = "none";
+  document.body.style.backgroundColor = "#FCFCF6";
 
   const KoreaWidth = `${userData.kuBadgeRatio}%`;
   const YonseiWidth = `${100 - userData.kuBadgeRatio}%`;
 
   useEffect(() => {
-    // const apiUrl = "http://localhost:3000/data/mockData.json";
     const apiUrl =
       "https://port-0-badgeback-jvvy2blm6d8yj1.sel5.cloudtype.app/api/game/get-univ-badge/";
     const token = localStorage.getItem("token");
@@ -29,7 +28,12 @@ function Home() {
         mode: "cors",
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
         console.log(data);
         setUserData(data);
@@ -75,7 +79,7 @@ function Home() {
         <img src={rockscissorpaper} alt="" />
       </div>
       <div className={styles.link}>
-        <Link to="/QR" className={styles.game}>
+        <Link to="/qr" state={{ role: "creator" }} className={styles.game}>
           대결방 만들기
         </Link>{" "}
         <Link to="/rule" className={styles.rule}>
@@ -86,4 +90,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Main;

@@ -21,7 +21,12 @@ function Ranker() {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
         setRankData(data.rankers);
         setMyRank(data.myRank);

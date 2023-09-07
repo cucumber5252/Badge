@@ -105,7 +105,12 @@ const Signup = ({ myData, socket, roomId }) => {
       body: JSON.stringify(bodyToFetch),
       mode: "cors",
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
         console.log("Parse complete:", data);
         localStorage.setItem("token", data.token);
@@ -113,7 +118,7 @@ const Signup = ({ myData, socket, roomId }) => {
       })
       .then(() => {
         if (roomId) {
-          navigate("/qr", { myData, visitorSocket: socket, roomId });
+          navigate("/qr", { state: { myData, visitorSocket: socket, roomId } });
           return;
         }
 

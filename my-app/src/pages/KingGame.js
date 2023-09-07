@@ -8,9 +8,8 @@ import rock from "../assets/Game1/rock.svg";
 import paper from "../assets/Game1/paper.svg";
 
 function KingGame() {
-  let [timeLeft, setTimeLeft] = useState(5);
-  let [choice, setChoice] = useState("");
-  let [outcome, setOutcome] = useState("");
+  const [timeLeft, setTimeLeft] = useState(5);
+  const [choice, setChoice] = useState("");
 
   const navigate = useNavigate();
 
@@ -58,10 +57,18 @@ function KingGame() {
 
         mode: "cors", //전달 형식에 관한 요소(고정값)
       })
-        .then((response) => response.json()) //결과를 응답으로 받아올 것임. 결과 보여주는 형식으로 바뀌어야함.
-        //받은 값으로 상황에 맞는 로직 작성하기
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error ${response.status}`);
+          }
+          return response.json();
+        })
         .then((data) => {
-          setOutcome(data.result);
+          console.log("data:", data);
+
+          navigate("/kingResult", {
+            state: { data, myChoice: choice },
+          });
         })
         .catch((error) => {
           console.log(error);

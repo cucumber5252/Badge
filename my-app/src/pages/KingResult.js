@@ -1,20 +1,26 @@
-import styles from "./Game2.module.css";
+import styles from "./KingResult.module.css";
+import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
 import scissor from "../assets/Game2/scissor.svg";
 import rock from "../assets/Game2/rock.svg";
 import paper from "../assets/Game2/paper.svg";
 
-import Back from "../components/Back/Back";
-import { useLocation } from "react-router-dom";
+import HomeButton from "../components/HomeButton/HomeButton";
+import Refight from "../components/Refight/Refight";
 
-function Game2() {
-  const location = useLocation;
-  const { socket, data } = location.state || {};
+function KingResult() {
+  const location = useLocation();
+  const { data, myChoice } = location.state || {};
+  const [isDraw, setIsDraw] = useState(false);
 
-  let opChoice = data.opChoice; //백에서 가져와야함
-  let myChoice = data.myChoice; //백에서 가져와야함
-  let result = data.result;
+  const opChoice = data.gmChoice;
+  const [result, setResult] = useState(data.result);
+
+  if (result === "tie") {
+    setResult("draw");
+    setIsDraw(true);
+  }
 
   ///한국어로 가위 바위 보 결과 저장
   let koreanOpChoice =
@@ -23,7 +29,6 @@ function Game2() {
   let koreanMyChoice =
     myChoice === "scissor" ? "가위" : myChoice === "rock" ? "바위" : "보";
 
-  socket.disconnect();
   return (
     <>
       <div className={styles.container}>
@@ -47,7 +52,8 @@ function Game2() {
               : result === "draw"
               ? styles.resultDivColorDraw
               : styles.resultDivColorLose
-          }`}
+          }
+            }`}
         >
           <div className={styles.result}>{result}</div>
         </div>
@@ -65,11 +71,11 @@ function Game2() {
           </div>
         </div>
         <div className={styles.back}>
-          <Back to={useState(-1)} />
+          {isDraw ? <Refight /> : <HomeButton />}
         </div>
       </div>
     </>
   );
 }
 
-export default Game2;
+export default KingResult;

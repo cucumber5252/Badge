@@ -15,6 +15,9 @@ const Present = () => {
     setPhoneNumber(e.target.value);
   };
 
+  document.body.style.background = "none";
+  document.body.style.backgroundColor = "#FCFCF6";
+
   const apiUrlToGet =
     "https://port-0-badgeback-jvvy2blm6d8yj1.sel5.cloudtype.app/api/user/get-phone-num-amount/";
   const token = localStorage.getItem("token");
@@ -27,9 +30,15 @@ const Present = () => {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
-        setAmount(data.amout);
+        console.log(data);
+        setAmount(data.amount);
       })
 
       .catch((error) => {
@@ -52,16 +61,21 @@ const Present = () => {
 
     //choice를 서버에 보내는 것은, 시간이 0초가 되었을 때임.
     fetch(apiUrlToSubmit, {
-      method: "POST", //선택한 것 보내드립니다
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-      }, //json형식으로 요청 보낼거다! (고정값))
-      body: JSON.stringify(bodyToFetch), //JS로 작성된 bodyToFetch를 JSON으로 바꾸고,body에 담는다.
+      },
+      body: JSON.stringify(bodyToFetch),
 
-      mode: "cors", //전달 형식에 관한 요소(고정값)
+      mode: "cors",
     })
-      .then((response) => response.json()) //결과를 응답으로 받아올 것임. 결과 보여주는 형식으로 바뀌어야함.
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}`);
+        }
+        return response.json();
+      })
 
       .catch((error) => {
         console.log(error);
@@ -115,7 +129,7 @@ const Present = () => {
             className={styles.submitPresentButtonText}
             onClick={handleSubmit}
           >
-            13
+            {amount}
           </span>
         </div>
       </div>

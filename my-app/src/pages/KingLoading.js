@@ -9,6 +9,9 @@ import Back from "../components/Back/Back";
 const KingLoading = ({ userData }) => {
   const [timeLeft, setTimeLeft] = useState("");
 
+  document.body.style.background = "none";
+  document.body.style.backgroundColor = "#FCFCF6";
+
   useEffect(() => {
     const apiUrl = `https://port-0-badgeback-jvvy2blm6d8yj1.sel5.cloudtype.app/api/game/check-available/`;
     const token = localStorage.getItem("token");
@@ -21,14 +24,29 @@ const KingLoading = ({ userData }) => {
       },
       mode: "cors",
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((err) => {
+            const error = new Error(err.message);
+            error.timeInterval = err.timeInterval;
+            throw error;
+          });
+        }
+        return response.json();
+      })
       .then((data) => {
         console.log("200 data:", data);
         setTimeLeft(0);
       })
       .catch((error) => {
-        console.log("400 error:", error);
-        setTimeLeft(error.timeLeft);
+        console.log("Error:", error);
+        if (error.message === "too soon") {
+          // or check the status code if it's available
+          console.log(error.timeInterval);
+          setTimeLeft(error.timeInterval); // use the time interval from the error
+        } else {
+          console.error("Unhandled error:", error);
+        }
       });
   }, []);
 
