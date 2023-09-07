@@ -57,7 +57,7 @@ function Qr() {
       if (data.status === "sucess") {
         //go to startGame
         navigate("/loading1", {
-          state: { opData: data.opData, myData, roomId },
+          state: { opData: data.opData, myData, roomId, role },
         });
       }
     });
@@ -87,6 +87,7 @@ function Qr() {
               opData: data.opData,
               myData,
               roomId,
+              role,
             },
           });
         } else if (data.status === "pending") {
@@ -98,6 +99,7 @@ function Qr() {
                   opData: data.opData,
                   myData,
                   roomId,
+                  role,
                 },
               });
             }
@@ -109,7 +111,7 @@ function Qr() {
     if (userId) {
     } else {
       //go to signup with roomId
-      navigate("/signup", { state: { myData, roomId } });
+      navigate("/signup", { state: { myData, roomId, role } });
     }
   }
 

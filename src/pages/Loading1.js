@@ -5,10 +5,11 @@ import eagle from "../assets/Loading1/eagle.svg";
 import tiger from "../assets/Loading1/tiger.svg";
 import mystery from "../assets/Loading1/mystery.svg";
 // import Back from "../components/Back/Back";
+import socket from "./socket";
 
 const Loading1 = () => {
   const location = useLocation();
-  const { socket, opData, myData, roomId } = location.state || {};
+  const { opData, myData, roomId, role } = location.state || {};
   const userId = myData.userId;
 
   const navigate = useNavigate();
@@ -23,11 +24,14 @@ const Loading1 = () => {
   let opWins = opData.wins;
   let opTotal = opData.total;
   let opLose = opTotal - opWins;
+  useEffect(() => {
+    socket.emit("refresh", { roomId, role });
+  }, []);
 
   socket.once("activateGame", (data) => {
     if (data.state === "success") {
       //go to game1 ''choice''
-      navigate("/game1", { state: { socket, userId, roomId } });
+      navigate("/game1", { state: { userId, roomId, role } });
     }
   });
 
