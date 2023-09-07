@@ -24,6 +24,9 @@ const Loading1 = () => {
   let opWins = opData.wins;
   let opTotal = opData.total;
   let opLose = opTotal - opWins;
+
+  const [isButtonEnabled, setButtonEnabled] = useState(true);
+
   useEffect(() => {
     socket.emit("refresh", { roomId, role });
   }, []);
@@ -37,7 +40,10 @@ const Loading1 = () => {
 
   const onClick = (e) => {
     e.preventDefault();
-    socket.emit("startGame", { roomId, userId });
+    if (isButtonEnabled) {
+      setButtonEnabled(false);
+      socket.emit("startGame", { roomId, userId, role });
+    }
   };
 
   return (
@@ -97,7 +103,7 @@ const Loading1 = () => {
         </div>
 
         <div className={styles.goToNextDiv} onClick={onClick}>
-          시작하기
+          {isButtonEnabled ? "시작하기" : "시작 중..."}
         </div>
       </div>
     </>
