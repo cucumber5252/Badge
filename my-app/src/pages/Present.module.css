@@ -71,9 +71,16 @@
 }
 
 .phoneNumberInput::placeholder {
-  /* font-family: "BMJUA"; */
   font-size: 5vw;
   color: black;
+}
+
+.submitButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 1vh;
 }
 
 .submitInfoButton {
@@ -88,7 +95,7 @@
 
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
-  margin-right: 24vw;
+  margin-right: 1vw;
 }
 
 .submitInfoButton::before {
@@ -137,6 +144,77 @@
 }
 
 .submitInfoButtonText {
+  margin-top: 2vh;
+  font-size: 6vw;
+}
+
+.submitPresentButton {
+  position: relative;
+  background: transparent;
+  width: 20vw;
+
+  padding: 1vh 1.1vw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+  margin-left: 2vw;
+}
+
+.submitPresentButton::before {
+  width: 20vw;
+  content: "";
+  position: absolute;
+  border: 0.5vw solid black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transform: skew(-11deg);
+  background-color: #ecc508;
+}
+
+.submitPresentButtonLastDiv {
+  position: absolute;
+  top: 0;
+  right: -0.5vw;
+}
+
+.submitPresentButtonLast {
+  width: 20vw;
+  font-size: 3vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: centere;
+  color: white;
+
+  position: relative;
+  background: transparent;
+
+  padding: 0.5vh 1vw;
+}
+
+.submitPresentButtonLast::before {
+  width: 20vw;
+  content: "";
+  position: absolute;
+  border: 0.5vw solid black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transform: skew(-11deg);
+  background-color: #4b4a46;
+}
+
+.submitPresentButtonText {
   margin-top: 2vh;
   font-size: 6vw;
 }

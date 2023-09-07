@@ -42,20 +42,30 @@
   margin-bottom: 2vh;
 }
 
+.univDiv {
+  margin-bottom: 4vh;
+}
+
 .showUnivError {
-  margin: 2vh 0 4vh;
+  margin: 0 0 4vh;
   color: red;
   font-size: 4vw;
 }
 
 .showNicknameError {
-  margin: 0 0 0 10vw;
+  margin: 0 3vw 0 0;
   color: red;
   font-size: 4vw;
 }
 
 .showIdError {
-  margin: 0 0 0 10vw;
+  margin: 0 3vw 0 0;
+  color: red;
+  font-size: 4vw;
+}
+
+.showPwError {
+  margin: 0 0 0 20vw;
   color: red;
   font-size: 4vw;
 }
@@ -83,6 +93,7 @@
 .nicknameInput,
 .idInput {
   margin-left: 4vw;
+  font-family: "BMJUA";
 }
 
 .nicknameInput,
@@ -95,7 +106,6 @@
   font-weight: 700;
   font-size: 4.5vw;
   padding: 0.6vh 2vw 0.5vh;
-  font-family: "BMJUA";
 }
 
 .nicknameInput::placeholder,

@@ -73,6 +73,8 @@
 .profileText {
   margin-top: 0.2vh;
   font-size: 3vw;
+  width: 17vw;
+  text-align: center;
 }
 
 .presentDiv {
@@ -83,6 +85,8 @@
   padding: 1vh 4vw 0.5vh;
   position: relative;
   background: transparent;
+
+  text-decoration: none;
 
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
@@ -160,6 +164,8 @@
   position: relative;
   background: transparent;
   padding: 1vh 2vw;
+  color: black;
+  text-decoration: none;
 }
 
 .myBadgeCharge::before {
@@ -230,31 +236,33 @@
 
 .settingOpenImg {
   width: 22vw;
-  margin-right: 2vw;
+  margin-right: 1vw;
 }
 
 .settingOpenedImg {
   width: 10vw;
-  margin-right: 2vw;
+  margin-right: 1vw;
   position: absolute;
   top: 0vh;
-  right: 0vw;
+  right: 1vw;
 }
 
 .settingOpenText1 {
   color: white;
+  text-decoration: none;
   position: absolute;
   font-size: 4vw;
   top: 5.5vh;
-  right: 3.5vw;
+  right: 2vw;
 }
 
 .settingOpenText2 {
   color: white;
+  text-decoration: none;
   position: absolute;
   font-size: 4vw;
   top: 9vh;
-  right: 3.5vw;
+  right: 2vw;
 }
 
 .test {

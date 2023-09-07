@@ -6,29 +6,30 @@ import { useEffect, useState } from "react";
 import KingImg from "../assets/KingLoading/KingImg.svg";
 import Back from "../components/Back/Back";
 
-const KingLoading = () => {
+const KingLoading = ({ userData }) => {
   const [timeLeft, setTimeLeft] = useState("");
 
   useEffect(() => {
-    const apiUrl = ``;
+    const apiUrl = `https://port-0-badgeback-jvvy2blm6d8yj1.sel5.cloudtype.app/api/game/check-available/`;
     const token = localStorage.getItem("token");
 
-    // fetch(apiUrl, {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `${token}`,
-    //   },
-    //   mode: "cors",
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setTimeLeft(data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    setTimeLeft(100);
+    fetch(apiUrl, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      mode: "cors",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("200 data:", data);
+        setTimeLeft(0);
+      })
+      .catch((error) => {
+        console.log("400 error:", error);
+        setTimeLeft(error.timeLeft);
+      });
   }, []);
 
   useEffect(() => {

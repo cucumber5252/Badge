@@ -20,21 +20,32 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const apiUrl = "/api/user/login/";
+    const apiUrl =
+      "https://port-0-badgeback-jvvy2blm6d8yj1.sel5.cloudtype.app/api/user/login/";
+
+    const bodyToFetch = {
+      userId: id,
+      password,
+    };
 
     fetch(apiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
 
-      body: JSON.stringify({
-        userId: id,
-        password,
-      }),
-
+      body: JSON.stringify(bodyToFetch),
       mode: "cors",
     })
       .then((response) => response.json())
-      .then(() => navigate("/home"))
+      .then((data) => {
+        console.log("Parse complete:", data);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", id);
+      })
+      .then(() => {
+        if (localStorage.getItem("token")) {
+          navigate("/home");
+        }
+      })
       .catch((error) => {
         console.log(error);
         setShowError(true);
@@ -66,8 +77,8 @@ const Login = () => {
       </form>
 
       <div className={styles.loginButton} onClick={handleSubmit}>
-        로그인하기
         {showError && <div className={styles.errorMessage}>*땡 틀렸습니다</div>}
+        로그인하기
       </div>
 
       <Link to="/signup" className={styles.signupButton}>

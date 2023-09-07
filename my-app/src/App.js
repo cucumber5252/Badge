@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NavBar from "./components/NavBar/NavBar";
 
 import yellowBack from "./assets/Backgrounds/yellow.png";
@@ -13,32 +13,20 @@ import Logout from "./pages/Logout";
 import Signup from "./pages/Signup";
 import Present from "./pages/Present";
 import KingLoading from "./pages/KingLoading";
+import KingGame from "./pages/KingGame";
 import Qr from "./pages/Qr";
+import Profile from "./pages/Profile";
+import Home from "./pages/Main";
+import Ranker from "./pages/Ranker";
+import Rule from "./pages/Rule";
+import JoinGame from "./pages/JoinGame";
+
+import Game1 from "./pages/Game1";
+import Game2 from "./pages/Game2";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState([]);
-
-  useEffect(() => {
-    const apiUrl = `http://localhost:3000/data/NavBar/NavBarData.json`;
-    const token = localStorage.getItem("token");
-
-    fetch(apiUrl, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${token}`,
-      },
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setUserData(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   // const backgroundImages = [
   //   yellowBack,
@@ -72,7 +60,7 @@ const App = () => {
           path="/present"
           element={
             <div>
-              <NavBar userData={userData} />
+              <NavBar userData={userData} setUserData={setUserData} />
               <Present />
             </div>
           }
@@ -81,17 +69,66 @@ const App = () => {
           path="/kingLoading"
           element={
             <div>
-              <NavBar userData={userData} />
+              <NavBar userData={userData} setUserData={setUserData} />
               <KingLoading />
             </div>
           }
         />
         <Route
+          path="/kingGame"
+          element={
+            <div>
+              <NavBar userData={userData} setUserData={setUserData} />
+              <KingGame />
+            </div>
+          }
+        />
+        <Route path="/join-game/:roomId" element={<JoinGame />} />
+
+        <Route
           path="/qr"
           element={
             <div>
-              <NavBar userData={userData} />
-              <Qr />
+              <NavBar userData={userData} setUserData={setUserData} />
+              <Qr userData={userData} />
+            </div>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <div>
+              <NavBar userData={userData} setUserData={setUserData} />
+              <Profile userData={userData} />
+            </div>
+          }
+        />
+
+        <Route
+          path="/home"
+          element={
+            <div>
+              <NavBar userData={userData} setUserData={setUserData} />
+              <Home />
+            </div>
+          }
+        />
+
+        <Route
+          path="/ranker"
+          element={
+            <div>
+              <NavBar userData={userData} setUserData={setUserData} />
+              <Ranker />
+            </div>
+          }
+        />
+        <Route
+          path="/rule"
+          element={
+            <div>
+              <NavBar userData={userData} setUserData={setUserData} />
+              <Rule />
             </div>
           }
         />

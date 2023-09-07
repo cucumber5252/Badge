@@ -1,5 +1,5 @@
 import styles from "./Present.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import KingImg from "../assets/Present/KingImg.svg";
 import PresentImg from "../assets/Present/PresentImg.svg";
@@ -9,15 +9,63 @@ import Back from "../components/Back/Back";
 const Present = () => {
   const lastNumber = 90;
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [amount, setAmount] = useState(5);
 
   const handlePhoneNumberChange = (e) => {
     setPhoneNumber(e.target.value);
   };
 
+  const apiUrlToGet =
+    "https://port-0-badgeback-jvvy2blm6d8yj1.sel5.cloudtype.app/api/user/get-phone-num-amount/";
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    fetch(apiUrlToGet, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setAmount(data.amout);
+      })
+
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submited!");
+
     //fetch 만들기
+    const apiUrlToSubmit =
+      "https://port-0-badgeback-jvvy2blm6d8yj1.sel5.cloudtype.app/api/game/god-game/";
+
+    const token = localStorage.getItem("token");
+
+    const bodyToFetch = {
+      phoneNumber,
+    };
+
+    //choice를 서버에 보내는 것은, 시간이 0초가 되었을 때임.
+    fetch(apiUrlToSubmit, {
+      method: "POST", //선택한 것 보내드립니다
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }, //json형식으로 요청 보낼거다! (고정값))
+      body: JSON.stringify(bodyToFetch), //JS로 작성된 bodyToFetch를 JSON으로 바꾸고,body에 담는다.
+
+      mode: "cors", //전달 형식에 관한 요소(고정값)
+    })
+      .then((response) => response.json()) //결과를 응답으로 받아올 것임. 결과 보여주는 형식으로 바뀌어야함.
+
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -47,18 +95,33 @@ const Present = () => {
           placeholder="연락받을 전화번호 쓰기"
         />
       </form>
-      <div className={styles.submitInfoButton}>
-        <div className={styles.submitInfoButtonLastDiv}>
-          <div className={styles.submitInfoButtonLast}>
-            마감까지 {lastNumber}명
+      <div className={styles.submitButtons}>
+        <div className={styles.submitInfoButton}>
+          <div className={styles.submitInfoButtonLastDiv}>
+            <div className={styles.submitInfoButtonLast}>
+              마감까지 {lastNumber}명
+            </div>
           </div>
+          <span className={styles.submitInfoButtonText} onClick={handleSubmit}>
+            선착순 신청하기
+          </span>
         </div>
-        <span className={styles.submitInfoButtonText} onClick={handleSubmit}>
-          선착순 신청하기
-        </span>
+
+        <div className={styles.submitPresentButton}>
+          <div className={styles.submitPresentButtonLastDiv}>
+            <div className={styles.submitPresentButtonLast}>신청한 선물</div>
+          </div>
+          <span
+            className={styles.submitPresentButtonText}
+            onClick={handleSubmit}
+          >
+            13
+          </span>
+        </div>
       </div>
+
       <div className={styles.backButtonDiv}>
-        <Back to={"/home"} />
+        <Back />
       </div>
     </div>
   );

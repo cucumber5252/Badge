@@ -7,7 +7,7 @@ import EagleImg from "../assets/Signup/EagleImg.svg";
 import ShadowTigerImg from "../assets/Signup/ShadowTigerImg.svg";
 import ShadowEagleImg from "../assets/Signup/ShadowEagleImg.svg";
 
-const Signup = () => {
+const Signup = ({ myData, socket, roomId }) => {
   const [univ, setUniv] = useState(null);
   const [nickname, setNickname] = useState("");
   const [id, setId] = useState("");
@@ -15,6 +15,11 @@ const Signup = () => {
 
   const [showNicknameError, setShowNicknameError] = useState(false);
   const [showIdError, setShowIdError] = useState(false);
+  const [showPwError, setShowPwError] = useState(false);
+
+  const [nicknameError, setNicknameError] = useState("");
+  const [idError, setIdError] = useState("");
+  const [pwError, setPwError] = useState("");
 
   const navigate = useNavigate();
 
@@ -27,17 +32,17 @@ const Signup = () => {
   };
 
   const handleEagleClick = (e) => {
-    if (univ === "yon") {
+    if (univ === "yonsei") {
       setUniv(null);
     } else {
-      setUniv("yon");
+      setUniv("yonsei");
     }
   };
 
   const handleNicknameChange = (e) => {
     const value = e.target.value;
     // 입력된 닉네임이 6자 이하일 때만 업데이트
-    if (value.length <= 6) {
+    if (value.length <= 7) {
       setNickname(value);
     }
   };
@@ -52,29 +57,79 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //fetch 만들기
 
-    const apiUrl = "/api/user/signup/";
+    let isValid = true;
+
+    if (!nickname) {
+      setNicknameError("닉네임을 입력하렴!");
+      setShowNicknameError(true);
+      isValid = false;
+    } else {
+      setShowNicknameError(false);
+    }
+
+    if (!id) {
+      setIdError("아이디를 입력하렴!");
+      setShowIdError(true);
+      isValid = false;
+    } else {
+      setShowIdError(false);
+    }
+
+    if (password.length < 8) {
+      setPwError("조건에 맞는 비밀번호를 입력하렴!");
+      setShowPwError(true);
+      isValid = false;
+    } else {
+      setShowPwError(false);
+    }
+
+    // If any of the fields are not valid, stop here.
+    if (!isValid) return;
+
+    const apiUrl =
+      "https://port-0-badgeback-jvvy2blm6d8yj1.sel5.cloudtype.app/api/user/signup/";
+
+    const bodyToFetch = {
+      userId: id,
+      nickname,
+      password,
+      univ,
+    };
+
+    console.log(bodyToFetch);
 
     fetch(apiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-
-      body: JSON.stringify({
-        userId: id,
-        password,
-      }),
-
+      body: JSON.stringify(bodyToFetch),
       mode: "cors",
     })
       .then((response) => response.json())
-      .then(() => navigate("/home"))
+      .then((data) => {
+        console.log("Parse complete:", data);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", id);
+      })
+      .then(() => {
+        if (roomId) {
+          navigate("/qr", { myData, visitorSocket: socket, roomId });
+          return;
+        }
+
+        if (localStorage.getItem("token")) {
+          navigate("/profile");
+        }
+      })
       .catch((error) => {
         if (error.message === "id") {
+          setIdError("*누군가 이미 선점했지롱");
           setShowIdError(true);
         } else if (error.message === "nickname") {
+          setNicknameError("*누군가 이미 선점했지롱");
           setShowNicknameError(true);
         }
+        console.log(error);
       });
   };
   return (
@@ -100,7 +155,7 @@ const Signup = () => {
                 onClick={handleTigerClick}
               />
             )}
-            {univ === "yon" ? (
+            {univ === "yonsei" ? (
               <img
                 className={styles.EagleImg}
                 src={EagleImg}
@@ -116,7 +171,7 @@ const Signup = () => {
               />
             )}
           </div>
-          <span className={styles.showUnivError}>*학교를 선택해주세요!</span>
+          <span className={styles.showUnivError}>*학교를 선택하렴!</span>
           <div className={styles.nicknameDiv}>
             <span className={styles.nicknameTitle}>닉네임</span>
             <input
@@ -129,9 +184,7 @@ const Signup = () => {
           </div>
 
           {showNicknameError && (
-            <span className={styles.showNicknameError}>
-              *다른 사람이 이미 선점했지롱
-            </span>
+            <span className={styles.showNicknameError}>*{nicknameError}</span>
           )}
           <div className={styles.idDiv}>
             <span className={styles.idTitle}>아이디</span>
@@ -143,9 +196,7 @@ const Signup = () => {
             ></input>
           </div>
           {showIdError && (
-            <span className={styles.showIdError}>
-              *다른 사람이 이미 선점했지롱
-            </span>
+            <span className={styles.showIdError}>*{idError}</span>
           )}
           <div className={styles.pwDiv}>
             <span className={styles.pwTitle}>비밀번호</span>
@@ -157,6 +208,9 @@ const Signup = () => {
               placeholder="8자 이상으로 설정해주세요!"
             />
           </div>
+          {showPwError && (
+            <span className={styles.showPwError}>*{pwError}</span>
+          )}
         </form>
         <div className={styles.signupButton} onClick={handleSubmit}>
           등록하기
