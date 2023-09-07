@@ -41,7 +41,7 @@ const Profile = () => {
       });
   }, []);
 
-  let {
+  const {
     nickname,
     wins,
     total,
@@ -52,8 +52,6 @@ const Profile = () => {
     myRank,
     univ,
   } = userProfile;
-
-  losers = ["안녕하세요", "헬로"];
 
   const loses = total - wins;
 

@@ -53,14 +53,14 @@ const NavBar = ({ userData, setUserData }) => {
       <div className={styles.NavBarDiv}>
         <div className={styles.MarginDiv}>
           <div className={styles.flexDiv1}>
-            <div className={styles.profileDiv}>
+            <Link to="/profile" className={styles.profileDiv}>
               {userData.univ === "korea" ? (
                 <img src={TigerImg} className={styles.profileTigerImg} alt="" />
               ) : (
                 <img src={EagleImg} className={styles.profileEagleImg} alt="" />
               )}
               <div className={styles.profileText}>{userData.nickname}</div>
-            </div>
+            </Link>
             <Link to="/present" className={styles.presentDiv}>
               <div>
                 <span className={styles.presentBadgeText}>
@@ -122,12 +122,12 @@ const NavBar = ({ userData, setUserData }) => {
                 로그아웃
               </Link>
               <a
-                href="https://www.notion.so/routine-hy/70e746b080c946d3a0f3dd1761a1fc50"
+                href="https://routine-hy.notion.site/70e746b080c946d3a0f3dd1761a1fc50?pvs=4"
                 className={styles.settingOpenText2}
                 onClick={(event) => {
                   event.preventDefault();
                   window.open(
-                    "https://www.notion.so/routine-hy/70e746b080c946d3a0f3dd1761a1fc50"
+                    "https://routine-hy.notion.site/70e746b080c946d3a0f3dd1761a1fc50?pvs=4"
                   );
                 }}
               >

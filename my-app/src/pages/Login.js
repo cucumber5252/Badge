@@ -48,6 +48,7 @@ const Login = () => {
       })
       .then(() => {
         console.log(localStorage.getItem("token"));
+        console.log(localStorage.getItem("userId"));
         if (localStorage.getItem("token")) {
           navigate("/main");
         }

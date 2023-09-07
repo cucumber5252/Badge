@@ -20,20 +20,21 @@ export default function Game1() {
     socket.once("choice", (data) => {
       if (data.choice !== choice) {
         //resend emit
+        socket.emit("choice", { choice, userId, roomId });
       }
     });
 
     socket.once("gameResult", (data) => {
       //Game2.js
-      navigate("/game2", { state: { socket, data } });
+      navigate("/game2", { state: { socket, data, roomId } });
     });
   };
 
   //////////////////////////////////////////
-  //가위바위보 선택 test
-  useEffect(() => {
-    console.log(choice);
-  }, [choice]);
+  // //가위바위보 선택 test
+  // useEffect(() => {
+  //   console.log(choice);
+  // }, [choice]);
 
   ////////타이머 코드///////
   useEffect(() => {

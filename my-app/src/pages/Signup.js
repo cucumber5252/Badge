@@ -23,6 +23,9 @@ const Signup = ({ myData, socket, roomId }) => {
 
   const navigate = useNavigate();
 
+  document.body.style.background = "none";
+  document.body.style.backgroundColor = "#FCFCF6";
+
   const handleTigerClick = (e) => {
     if (univ === "korea") {
       setUniv(null);
@@ -112,7 +115,7 @@ const Signup = ({ myData, socket, roomId }) => {
         return response.json();
       })
       .then((data) => {
-        console.log("Parse complete:", data);
+        // console.log("Parse complete:", data);
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", id);
       })
@@ -123,7 +126,7 @@ const Signup = ({ myData, socket, roomId }) => {
         }
 
         if (localStorage.getItem("token")) {
-          navigate("/profile");
+          navigate("/main");
         }
       })
       .catch((error) => {

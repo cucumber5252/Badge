@@ -6,11 +6,16 @@ import rock from "../assets/Game2/rock.svg";
 import paper from "../assets/Game2/paper.svg";
 
 import Back from "../components/Back/Back";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import HomeButton from "../components/HomeButton/HomeButton";
+import Refight from "../components/Refight/Refight";
 
 function Game2() {
   const location = useLocation;
-  const { socket, data } = location.state || {};
+  const navigate = useNavigate();
+  const [isDraw, setIsDraw] = useState(false);
+  const { socket, data, roomId, userId } = location.state || {};
 
   let opChoice = data.opChoice; //백에서 가져와야함
   let myChoice = data.myChoice; //백에서 가져와야함
@@ -23,7 +28,28 @@ function Game2() {
   let koreanMyChoice =
     myChoice === "scissor" ? "가위" : myChoice === "rock" ? "바위" : "보";
 
-  socket.disconnect();
+  if (result === "draw") {
+    setIsDraw(true);
+    setTimeout(() => {
+      navigate("/game1", { state: { socket, roomId, userId } });
+    }, 3000);
+  } else {
+    socket.disconnect();
+  }
+
+  // function TfBack() {
+  //   if ( result === "draw") {
+  //     return <>
+  //     <div className={styles.back}>
+  //       <Back />
+  //     </div>
+  //     </>
+
+  //   }else{
+  //     return <div className={styles.back}></div>
+  //   }
+  // }
+
   return (
     <>
       <div className={styles.container}>
@@ -64,8 +90,9 @@ function Game2() {
             {koreanMyChoice}
           </div>
         </div>
+
         <div className={styles.back}>
-          <Back to={useState(-1)} />
+          {isDraw ? <Refight /> : <HomeButton />}
         </div>
       </div>
     </>

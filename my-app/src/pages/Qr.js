@@ -17,7 +17,11 @@ function Qr() {
   const [qrCode, setQrcode] = useState("");
   const location = useLocation();
   const { roomId, visitorSocket, role, myData } = location.state || {};
+  const userId = localStorage.getItem("userId");
+  const [state, setState] = useState(false);
 
+  console.log(roomId, visitorSocket, role, myData, userId);
+  //배경랜덤지정코드
   const backgroundImages = [
     yellowBack,
     blueBack,
@@ -35,7 +39,11 @@ function Qr() {
     document.body.style.backgroundSize = "cover";
   }, [selectedBackground]);
 
-  const userId = localStorage.getItem("useId");
+  //
+  useEffect(() => {
+    if (state) socket.emit("createGame", { roomId });
+  }, [state]);
+
   const apiUrl = "https://port-0-badgeback-jvvy2blm6d8yj1.sel5.cloudtype.app/";
   const navigate = useNavigate();
   let socket;
@@ -62,11 +70,12 @@ function Qr() {
   }
 
   socket.on("connect", (data) => {
-    console.log("connect to server", data.socket.id);
+    console.log("connect to server", socket.id);
 
     if (role === "creator") {
-      socket.emit("createRoom", { userId });
-      socket.once("createRoom", (data) => {
+      setState(true);
+
+      socket.once("createGame", (data) => {
         setQrcode(data.qrCode);
         console.log("gameRoom", data.roomId);
         socket.once("waiting", (data) => {
@@ -82,7 +91,7 @@ function Qr() {
             });
           } else if (data.status === "pending") {
             //wait for user sign up
-            socket.once("wating", (data) => {
+            socket.once("waiting", (data) => {
               if (data.status === "success") {
                 navigate("/loading1", {
                   state: {
