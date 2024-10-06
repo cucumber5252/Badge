@@ -16,3 +16,10 @@ React, Socket.io
 ![login](https://github.com/user-attachments/assets/b6818bb1-13d6-4c4d-99ba-fcbe3dcf9752)
 ![profile](https://github.com/user-attachments/assets/35dc8a4a-0340-40fb-9921-f7d7d162e48a)
 ![iPhone SE - 2](https://github.com/user-attachments/assets/258aa891-c2ef-417f-915b-b5813754a4cc)
+
+
+## 문의
+
+프로젝트 관련 문의는 GitHub를 통해 해주시면 감사하겠습니다.
+
+-   GitHub: [cucumber5252](https://github.com/cucumber5252)
