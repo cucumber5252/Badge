@@ -1,0 +1,163 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 83vh;
+}
+
+.profileDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileImgDiv {
+  padding: 1.5vh 3vw;
+}
+
+.profileImg {
+  width: 35vw;
+  height: 16vh;
+}
+
+.profileName,
+.profileResult,
+.profileRank,
+.listTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  filter: drop-shadow(1vw 1vh 1vh rgba(0, 0, 0, 0.25)); /* 상대 단위 사용 */
+}
+
+.profileName::before,
+.profileResult::before,
+.profileRank::before,
+.listTitle::before {
+  content: "";
+  position: absolute;
+  border: 0.5vw solid black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transform: skew(-15deg);
+}
+
+.profileName {
+  width: 40vw;
+  height: 6vh;
+  font-size: 6vw;
+}
+
+.profileName::before {
+  background-color: #f3f3f3;
+}
+
+.profileResult {
+  width: 30vw;
+  height: 5vh;
+  font-size: 5vw;
+}
+
+.profileResult::before {
+  background-color: #dd7800;
+}
+
+.profileRank {
+  width: 15vw;
+  height: 5vh;
+  font-size: 5vw;
+}
+
+.profileRank::before {
+  background-color: #ecc508;
+}
+
+.profileInfo {
+  height: 18vh;
+  margin-left: 5vw;
+}
+
+.profileResultRank {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 1vh;
+}
+
+.profileRank {
+  margin-left: 2vw;
+}
+
+.listDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  width: 90vw;
+  height: auto;
+
+  padding: 2vh 1vw;
+
+  border-radius: 9vh;
+  background-color: #343c4f;
+
+  margin-top: 5vh;
+  overflow: hidden;
+}
+
+.listImg {
+  width: 20vw;
+  height: auto;
+  margin-left: 3vw;
+}
+
+.listTitle {
+  width: 40vw;
+  height: 6vh;
+  font-size: 5vw;
+  margin-left: 3vw;
+  margin-bottom: 1vh;
+}
+
+.listTitle::before {
+  background-color: #ecc508;
+}
+
+.listWrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 58vw;
+  height: 13vh;
+  color: white;
+  /* background-color: red; */
+  overflow-y: scroll; /* 스크롤 가능하도록 설정 */
+}
+
+.listItem {
+  width: calc(50% - 3vw); /* 여백 고려하여 설정 */
+  height: 3vh;
+  font-size: 4.5vw;
+  margin: 0.25vh 0.5vw; /* 여백 설정 */
+}
+
+.listWin {
+  margin-left: 3vw;
+  width: fit-content;
+}
+
+.backButtonDiv {
+  margin-top: 5vh;
+}

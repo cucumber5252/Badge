@@ -1,0 +1,90 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 83vh; /* 화면 높이 전체를 커버하도록 설정 */
+}
+
+.square {
+  position: relative;
+  background: transparent;
+  width: 80vw;
+  height: 3vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.square2 {
+  position: relative;
+  background: transparent;
+  width: 80vw;
+  height: 5.5vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 0.5vh;
+}
+
+.square::before {
+  background-color: #343c4f;
+  content: "";
+  position: absolute;
+  border: 0.5vw solid black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transform: skew(-20deg);
+}
+.square2::before {
+  background-color: #343c4f;
+  content: "";
+  position: absolute;
+  border: 0.5vw solid black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transform: skew(-20deg);
+}
+.square:nth-child(2) {
+  margin-top: 2vh; /* 두 번째 .square 요소를 밑으로 이동 */
+}
+
+.square:nth-child(3) {
+  margin-top: 2vh; /* 세 번째 .square 요소를 더 밑으로이동 */
+}
+.square:nth-child(6) {
+  margin-top: 1vh;
+}
+.imagecontainer {
+  position: relative;
+  display: flex;
+  margin-top: 3vh;
+}
+.KvsY {
+  width: 26vw;
+  margin-right: 3vw;
+}
+.vsTotal {
+  width: 42vw;
+}
+.KvsK {
+  width: 26vw;
+  margin-right: 3vw;
+}
+.YvsY {
+  width: 26vw;
+}
+
+.backButtonDiv {
+  margin-top: 5vh;
+}

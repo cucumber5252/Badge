@@ -1,0 +1,33 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+button {
+  background: none;
+  color: inherit;
+  border: none;
+  cursor: pointer;
+  outline: inherit;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+/* a {
+  text-decoration: none;
+  color: inherit;
+} */
+
+input:focus {
+  outline: none;
+}
+
+body {
+  min-width: 320px;
+  overflow: hidden;
+}

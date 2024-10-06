@@ -1,0 +1,158 @@
+.loginDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: relative;
+}
+
+.backImgLink {
+  position: absolute;
+  top: 0vh;
+  left: 0vw;
+  height: 6vh;
+  z-index: 1;
+}
+
+.backImg {
+  height: 4vh;
+  margin: 1vh 2vw;
+}
+
+.TigerImg,
+.EagleImg {
+  width: 30vw;
+}
+
+.TigerImg {
+  margin-right: 5vw;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.nicknameDiv,
+.idDiv,
+.pwDiv {
+  margin-bottom: 2vh;
+}
+
+.univDiv {
+  margin-bottom: 4vh;
+}
+
+.showUnivError {
+  margin: 0 0 4vh;
+  color: red;
+  font-size: 4vw;
+}
+
+.showNicknameError {
+  margin: 0 3vw 0 0;
+  color: red;
+  font-size: 4vw;
+}
+
+.showIdError {
+  margin: 0 3vw 0 0;
+  color: red;
+  font-size: 4vw;
+}
+
+.showPwError {
+  margin: 0 0 0 20vw;
+  color: red;
+  font-size: 4vw;
+}
+
+.nicknameDiv,
+.idDiv,
+.pwDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.idDiv,
+.pwDiv {
+  margin-top: 3vh;
+}
+
+.nicknameTitle,
+.idTitle,
+.pwTitle {
+  font-size: 6vw;
+  margin-right: 3vw;
+}
+
+.nicknameInput,
+.idInput {
+  margin-left: 4vw;
+  font-family: "BMJUA";
+}
+
+.nicknameInput,
+.idInput,
+.pwInput {
+  width: 50vw;
+  border: 0.7vw solid black;
+  height: 2.5vh;
+  background-color: #f4e286;
+  font-weight: 700;
+  font-size: 4.5vw;
+  padding: 0.6vh 2vw 0.5vh;
+}
+
+.nicknameInput::placeholder,
+.pwInput::placeholder {
+  font-size: 4.5vw;
+  font-family: "BMJUA";
+}
+
+.signupButton {
+  width: 25vw;
+  height: fit-content;
+  padding: 3vw 2vh;
+  font-size: 6vw;
+  text-align: center;
+  position: relative;
+  background: transparent;
+}
+
+.signupButton::before {
+  content: "";
+  position: absolute;
+  border: 0.8vw solid black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transform: skew(-15deg);
+}
+
+.signupButton::before {
+  background-color: #f4e286;
+}
+
+.signupButton {
+  margin-top: 5vh;
+}
+
+.warnings {
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.warningDiv {
+  color: red;
+  font-size: 4vw;
+  margin-bottom: 0.5vh;
+}

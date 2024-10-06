@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "BMJUA";
+  src: url("./fonts/BMJUA_ttf.ttf");
+}
+
+body {
+  font-family: "BMJUA";
+  margin: 0;
+  padding: 0;
+}
